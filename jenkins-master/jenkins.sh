@@ -2,7 +2,17 @@
 
 : "${JENKINS_WAR:="/usr/share/jenkins/jenkins.war"}"
 : "${JENKINS_HOME:="/var/jenkins_home"}"
-touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_FILE_LOG}. Wrong volume permissions?"; exit 1; 
+mkdir -p /usr/share/jenkins/ref/.ssh/
+SSH_KEY=$(aws ssm get-parameters --names "paymerang-jenkins" --query "Parameters[0].Value" --with-decryption --region us-east-1)
+SSH_KEY="${SSH_KEY%\"}"
+SSH_KEY="${SSH_KEY#\"}"
+echo -e  "$SSH_KEY" > /usr/share/jenkins/ref/.ssh/id_rsa
+echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> /usr/share/jenkins/ref/.ssh/config
+
+chown jenkins:jenkins -R /usr/share/jenkins/ref/.ssh/
+chmod 600 /usr/share/jenkins/ref/.ssh/id_rsa
+chmod 600 /usr/share/jenkins/ref/.ssh/config
+touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_FILE_LOG}. Wrong volume permissions?"; exit 1; }
 echo "--- Copying files at $(date)" >> "$COPY_REFERENCE_FILE_LOG"
 find /usr/share/jenkins/ref/ \( -type f -o -type l \) -exec bash -c '. /usr/local/bin/jenkins-support; for arg; do copy_reference_file "$arg"; done' _ {} +
 
@@ -30,9 +40,5 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   exec java -Duser.home="$JENKINS_HOME" "${java_opts_array[@]}" -jar ${JENKINS_WAR} "${jenkins_opts_array[@]}" "$@"
 fi
 
-#Configure SSH keys 
-
-mkdir -p /var/jenkins_home/.ssh
-echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /var/jenkins_home/.ssh/config
 # As argument is not jenkins, assume user want to run his own process, for example a `bash` shell to explore this image
 exec "$@"

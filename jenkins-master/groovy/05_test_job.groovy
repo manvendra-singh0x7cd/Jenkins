@@ -1,7 +1,7 @@
 import hudson.plugins.git.*;
 import jenkins.model.Jenkins;
 
-def scm = new GitSCM("https://github.com/Buffer0x7cd/test123.git")
+def scm = new GitSCM("git@github.com:manvendra-singh0x7cd/test.git")
 scm.branches = [new BranchSpec("*/master")];
 
 def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")

@@ -30,7 +30,6 @@ RUN echo ${jenkins_version} > /usr/share/jenkins/ref/jenkins.install.UpgradeWiza
     && echo ${jenkins_version} > /usr/share/jenkins/ref/jenkins.install.InstallUtil.lastExecVersion
 RUN /usr/local/bin/install-plugins.sh < /tmp/plugins.txt
 
-
 #ENV JAVA_OPTS="-Xmx3072m"
 ENV JENKINS_OPTS=" --logfile=/var/log/jenkins/jenkins.log --webroot=/var/cache/jenkins/war -Djenkins.install.runSetupWizard=false"
 COPY jenkins.sh /usr/local/bin/jenkins.sh

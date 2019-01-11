@@ -1,9 +1,7 @@
 build:
-	@docker-compose -p jenkins build
+	@docker-compose -p jenkins build --no-cache
 run:
-	@docker-compose -p jenkins up -d nginx master proxy
-run-win:
-	@docker-compose -p jenkins up -d nginx master
+	@docker-compose -p jenkins up -d 
 stop:
 	@docker-compose -p jenkins down
 clean-data: 
