@@ -10,4 +10,7 @@ output "ELB_ENDPOINT" {
   value = "${aws_elb.elb_http.dns_name}"
 }
 
+output "ELB_NAME" {
+  value = "${aws_elb.elb_http.name}"
+}
 
