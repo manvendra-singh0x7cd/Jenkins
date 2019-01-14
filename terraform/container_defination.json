@@ -1,0 +1,55 @@
+[
+        {
+            "name": "jenkins-master",
+            "image": "046078814158.dkr.ecr.us-east-1.amazonaws.com/jenkins-master:2",
+            "memoryReservation": 3072,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 80,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "JENKINS_USER",
+                    "value": "sourcefuse"
+                },
+                {
+                    "name": "JENKINS_PASS",
+                    "value": "Source@123"
+                },
+                {
+                    "name": "JENKINS_URL",
+                    "value": "ci.paymerang.com"
+                },
+                {
+                    "name": "JENKINS_NB_EXECUTORS",
+                    "value": "3"
+                },
+                {
+                    "name": "JENKINS_CSRF",
+                    "value": "true"
+                },
+                {
+                    "name": "JENKINS_SLAVE_AGENT_PORT",
+                    "value": "50000"
+                }
+            ],
+            "mountPoints": [
+                {
+                    "sourceVolume": "jenkins_home",
+                    "containerPath": "/var/jenkins_home",
+                    "readOnly": false
+                },
+                {
+                    "sourceVolume": "docker-daemon",
+                    "containerPath": "/var/run/docker.sock",
+                    "readOnly": false
+                }
+            ],
+            "privileged": true,
+            "readonlyRootFilesystem": false
+        }
+]
