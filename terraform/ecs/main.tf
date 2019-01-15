@@ -1,7 +1,6 @@
 
 
 #Create ECS  Cluster
-
 variable "ECS_CLUSTER_NAME" {
   default = "terraform-ecs-cluster"
 }
