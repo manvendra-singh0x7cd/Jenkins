@@ -18,7 +18,7 @@
                 },
                 {
                     "name": "JENKINS_PASS",
-                    "value": "Source@123"
+                    "value": "vahgh2Wooca7ejaikush"
                 },
                 {
                     "name": "JENKINS_URL",
@@ -35,6 +35,14 @@
                 {
                     "name": "JENKINS_SLAVE_AGENT_PORT",
                     "value": "50000"
+                },
+                {
+                    "name": "JENKINS_JOB",
+                    "value": "git@github.com:sourcefuse/paymerang-terraform.git"
+                },
+                {
+                    "name": "JENKINS_BRANCH",
+                    "value": "PAYM-35"
                 }
             ],
             "mountPoints": [

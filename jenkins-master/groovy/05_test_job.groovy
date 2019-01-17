@@ -1,13 +1,14 @@
 import hudson.plugins.git.*;
 import jenkins.model.Jenkins;
 
-def scm = new GitSCM("git@github.com:manvendra-singh0x7cd/test.git")
-scm.branches = [new BranchSpec("*/master")];
+
+def scm = new GitSCM(System.getenv("JENKINS_JOB"))
+scm.branches = [new BranchSpec(System.getenv("JENKINS_BRANCH"))];
 
 def flowDefinition = new org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition(scm, "Jenkinsfile")
 
 def parent = Jenkins.instance
-def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "New Job")
+def job = new org.jenkinsci.plugins.workflow.job.WorkflowJob(parent, "paymerang-dev")
 job.definition = flowDefinition
 
 parent.reload()
