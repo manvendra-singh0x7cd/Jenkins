@@ -7,6 +7,7 @@
 
 - Make sure you have valid permissions to run the stack , if running from local then setup aws cli also (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html#install-tool-bundled)
 
+
 ### Steps to rollout infra ###
 
 1. Run `make up` to roll out the infra
@@ -32,3 +33,8 @@
 - plugins.txt is used to perform plugin installation 
 - The build Job is performed inside docker containers
 - Each Source repo must contain a `Jenkinsfile` and `Dockerfile` , these 2 files will be Used to build the slave image in which jobs will be executed. 
+
+
+### **Known Issue:** ###    
+It is to be understood that for the first time the Job will fail. This is due to the default design of Jenkinsfile pipeline as it is necessory for Jenkins to pick the required parameters during first job build and uses the same paraeters from second job. 
+So once the job has failed for the first time, re-trigger the job again.

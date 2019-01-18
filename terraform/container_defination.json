@@ -42,7 +42,7 @@
                 },
                 {
                     "name": "JENKINS_BRANCH",
-                    "value": "PAYM-35"
+                    "value": "develop"
                 }
             ],
             "mountPoints": [
