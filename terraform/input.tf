@@ -7,5 +7,6 @@ variable "PolicyList" {
                         "arn:aws:iam::aws:policy/AmazonS3FullAccess",
                         "arn:aws:iam::aws:policy/AWSElasticBeanstalkFullAccess",
                         "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
-                        "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"]
+                        "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
+                        "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }

@@ -42,7 +42,7 @@
                 },
                 {
                     "name": "JENKINS_BRANCH",
-                    "value": "develop"
+                    "value": "release-v2"
                 }
             ],
             "mountPoints": [
