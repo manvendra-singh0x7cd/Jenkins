@@ -7,6 +7,6 @@ module "ecs" {
   SUBNET_LIST  = ["subnet-7bb5851e"]
   AmiId = "ami-06bec82fb46167b4f"
   InstanceKeyPairName= "Jenkins-master"
-  AttachExtraPolicies = ["arn:aws:iam::aws:policy/AmazonSSMFullAccess"]
+  AttachExtraPolicies = "${var.PolicyList}"
   AsgHealthCheckType = "EC2"
 }
