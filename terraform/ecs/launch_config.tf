@@ -28,16 +28,15 @@ resource "aws_launch_configuration" "ecs_launch_config" {
   security_groups = ["${aws_security_group.instance_port.id}"]
   user_data  = <<EOF
                 #!/bin/bash
-                echo ECS_CLUSTER=${var.ECS_CLUSTER_NAME} >> /etc/ecs/ecs.config
-                exec 2>/var/log/ecs/ecs-agent-install.log
                 set -x
+                echo ECS_CLUSTER=${var.ECS_CLUSTER_NAME} >> /etc/ecs/ecs.config
+                stop ecs 
+                start ecs
                 until curl -s http://localhost:51678/v1/metadata
                 do
                   sleep 1
                 done
-                docker plugin install rexray/ebs REXRAY_PREEMPT=true EBS_REGION=${var.AWS_REGION} --grant-all-permissions
-                stop ecs
-                start ecs
+                docker plugin install rexray/ebs REXRAY_PREEMPT=true EBS_REGION=${var.AWS_REGION} EBS_ACCESSKEY=${var.AWS_ACCESS_KEY}  EBS_SECRETKEY=${var.AWS_SECRET_KEY}  --grant-all-permissions
                EOF
 
   lifecycle = {

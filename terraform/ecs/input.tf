@@ -28,3 +28,11 @@ variable "AmiId" {
 variable "InstanceKeyPairName" {
   description = "Required: Key pair for the ec2 instances"
 }
+
+variable "AWS_ACCESS_KEY" {
+  
+}
+variable "AWS_SECRET_KEY" {
+  
+}
+

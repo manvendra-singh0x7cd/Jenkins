@@ -1,6 +1,6 @@
 resource "aws_ecs_task_definition" "jenkins-task" {
   family = "jenkins"
-  container_definitions = "${data.template_file.container_defination.rendered}"
+  container_definitions = "${file("container_defination.json")}"
   volume = {
       name = "jenkins_home"
       docker_volume_configuration  = {

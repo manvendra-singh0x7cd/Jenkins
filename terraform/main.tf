@@ -21,6 +21,8 @@ module "ecs" {
   InstanceKeyPairName= "Jenkins-master"
   AttachExtraPolicies = "${var.PolicyList}"
   AsgHealthCheckType = "EC2"
+  AWS_ACCESS_KEY= "${aws_iam_access_key.rexray-user-accesskey.id}"
+  AWS_SECRET_KEY = "${aws_iam_access_key.rexray-user-accesskey.secret}"
 }
 
 
@@ -40,4 +42,11 @@ resource "aws_iam_user_policy" "rexray-user-policy" {
 
 resource "aws_iam_access_key" "rexray-user-accesskey" {
   user = "${aws_iam_user.rexray-user.name}"
+}
+
+resource "null_resource" "export_rendered_template" {
+  count = "${var.Debug}"
+  provisioner "local-exec" {
+    command = "cat > test_output.json <<EOL\n${data.template_file.container_defination.rendered}\nEOL"
+  }
 }

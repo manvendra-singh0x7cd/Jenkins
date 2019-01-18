@@ -10,3 +10,15 @@ variable "PolicyList" {
                         "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
                         "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }
+
+variable "Debug" {
+  default = false
+  description = "Run the terraform template locally"
+}
+
+
+variable "TAGS" {
+  default = {
+    Project="Terraform"
+  }
+}
