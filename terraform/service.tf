@@ -2,6 +2,10 @@ variable "JenkinsServiceTaskCount" {
   default = 1
 }
 
+variable "MinimumServiceHealthPercent" {
+  default = 0
+}
+
 
 resource "aws_ecs_service" "jenkins-service" {
   name = "jenkins-service"
@@ -9,4 +13,5 @@ resource "aws_ecs_service" "jenkins-service" {
   desired_count = "${var.JenkinsServiceTaskCount}"
   launch_type = "EC2"
   cluster = "${module.ecs.ECS_CLUSTER_ID}"
+  deployment_minimum_healthy_percent = "${var.MinimumServiceHealthPercent}"
 }
