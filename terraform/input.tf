@@ -10,3 +10,9 @@ variable "PolicyList" {
                         "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
                         "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
 }
+
+variable "ELBSslArn" {
+  description = "ACM Certificate for ELB SSL"
+  default = "arn:aws:acm:us-east-1:046078814158:certificate/0fe7bd03-a221-4fa7-8c4b-f467a4b19b64"
+}
+

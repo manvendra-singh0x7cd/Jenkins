@@ -9,4 +9,5 @@ module "ecs" {
   InstanceKeyPairName= "Jenkins-master"
   AttachExtraPolicies = "${var.PolicyList}"
   AsgHealthCheckType = "EC2"
+  ELBSslArn = "${var.ELBSslArn}"
 }

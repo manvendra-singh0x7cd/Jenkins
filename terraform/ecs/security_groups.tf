@@ -18,14 +18,14 @@ variable "InstanceSshPort" {
 
 
 
-resource "aws_security_group" "elb_port_80" {
+resource "aws_security_group" "elb_port_443" {
     name_prefix = "ELB_SG"
-    description = "Allow Port 80 Traffic"
+    description = "Allow Port 443 Traffic"
     vpc_id = "${var.VPC_ID}"
 
     ingress = {
-        from_port = 80
-        to_port = 80
+        from_port = 443
+        to_port = 443
         protocol = "${var.LbProtocol}"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -50,7 +50,7 @@ resource "aws_security_group" "instance_port" {
         from_port = "${var.InstancePort}"
         to_port = "${var.InstancePort}"
         protocol = "${var.InstanceProtocol}"
-        security_groups = ["${aws_security_group.elb_port_80.id}"]
+        security_groups = ["${aws_security_group.elb_port_443.id}"]
   }
 
   egress = {

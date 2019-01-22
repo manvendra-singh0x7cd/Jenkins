@@ -23,3 +23,8 @@ variable "AmiId" {
 variable "InstanceKeyPairName" {
   description = "Required: Key pair for the ec2 instances"
 }
+
+variable "ELBSslArn" {
+  description = "ACM arn for ssl"
+}
+

@@ -26,7 +26,7 @@ resource "aws_elb" "elb_http" {
   name_prefix = "tf"
   subnets = "${var.SUBNET_LIST}"
   count = "${var.ElbSslArn == ""? 1 : 0}"
-  security_groups = ["${aws_security_group.elb_port_80.id}"]
+  security_groups = ["${aws_security_group.elb_port_443.id}"]
 #   access_logs = {
 #         bucket_prefix = "tf-elb-log"
 #         interval = "${var.ElbInterval}"
@@ -37,8 +37,9 @@ resource "aws_elb" "elb_http" {
   listener = {
       instance_port = "${var.InstancePort}"
       instance_protocol = "http"
-      lb_port = 80
-      lb_protocol = "http"
+      lb_port = 443
+      lb_protocol = "https"
+      ssl_certificate_id = "${var.ELBSslArn}"
     }
 
     health_check = {
