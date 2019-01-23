@@ -35,7 +35,8 @@ resource "aws_iam_role_policy_attachment" "ecs_instance_ssm_role" {
 
 
 resource "aws_iam_instance_profile" "ecs-instance-profile" {
-    name = "ecs-instance-profile"
+    name_prefix = "ecs-instance-profile"
+
     path = "/"
     role = "${aws_iam_role.ecs-instance-role.id}"
     provisioner "local-exec" {

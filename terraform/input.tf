@@ -1,18 +1,34 @@
 variable "AWS_REGION" {
-  default = "us-east-1"
+  description = "Region in which Jenkins Must Be Deployed"
 }
 
 variable "PolicyList" {
-  default = ["arn:aws:iam::aws:policy/AmazonSSMFullAccess",
-                        "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-                        "arn:aws:iam::aws:policy/AWSElasticBeanstalkFullAccess",
-                        "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser",
-                        "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
-                        "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"]
+  type = "list"
+  description = "Extra Policies that needs to be attached to Jenkins"
 }
 
 variable "ELBSslArn" {
   description = "ACM Certificate for ELB SSL"
-  default = "arn:aws:acm:us-east-1:046078814158:certificate/0fe7bd03-a221-4fa7-8c4b-f467a4b19b64"
+}
+
+
+variable "SUBNET_LIST" {
+  type = "list"
+  description = "List of Subnets in which ASG and ELB will be deployed"
+}
+
+variable "AMiID" {
+  description = "AMI to use for ECS Instances"
+}
+variable "InstanceKeyPairName" {
+  description = "Key-pair to use for ECS Instances"
+}
+
+variable "AsgHealthCheckType" {
+  description = "Healthcheck Type for AutoScaling Group, Valid values are EC2/ELB"
+}
+
+variable ECS_CLUSTER_NAME {
+  description = "name of the ecs Cluster "
 }
 

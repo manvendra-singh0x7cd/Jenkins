@@ -19,11 +19,70 @@
 6. Destroy the Infra by running make down ( note this can cause dataloss for the jenkins)
 
 
-### Parameters ###
+<!-- ### Parameters ###
 1. PolicyList: List of policy that needs to be attached to jenkins instance
+2. **Optional Module Parameter List**    
+                            . ECS_CLUSTER_NAME: Name of the
+                            New Ecs Cluster
+                    -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| AMiID | AMI to use for ECS Instances | string | n/a | yes |
+| AWS\_REGION | Region in which Jenkins Must Be Deployed | string | n/a | yes |
+| AsgHealthCheckType | Healthcheck Type for AutoScaling Group, Valid values are EC2/ELB | string | n/a | yes |
+| ECS\_CLUSTER\_NAME | name of the ecs Cluster | string | n/a | yes |
+| ELBSslArn | ACM Certificate for ELB SSL | string | n/a | yes |
+| InstanceKeyPairName | Key-pair to use for ECS Instances | string | n/a | yes |
+| JenkinsServiceTaskCount |  | string | `"1"` | no |
+| MinimumServiceHealthPercent |  | string | `"0"` | no |
+| PolicyList | Extra Policies that needs to be attached to Jenkins | list | n/a | yes |
+| SUBNET\_LIST | List of Subnets in which ASG and ELB will be deployed | list | n/a | yes |
 
 
- ### *JENKINS Description*  ###  
+## Additional Input for ECS Module
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| AmiId | Image ID to use | string | n/a | yes |
+| AsgDesired |  | string | `"1"` | no |
+| AsgHealthCheckType |  | string | `"ELB"` | no |
+| AsgMax |  | string | `"1"` | no |
+| AsgMin |  | string | `"1"` | no |
+| AttachExtraPolicies |  | list | `<list>` | no |
+| AttachPublicIp |  | string | `"true"` | no |
+| ECS\_CLUSTER\_NAME |  | string | `"terraform-ecs-cluster"` | no |
+| ELBSslArn | ACM arn for ssl | string | n/a | yes |
+| ElbAccesslogBucket |  | string | `""` | no |
+| ElbConnectionDraining |  | string | `"true"` | no |
+| ElbConnectionDrainingTimeout |  | string | `"400"` | no |
+| ElbCrossLoadBalancing |  | string | `"true"` | no |
+| ElbInterval |  | string | `"60"` | no |
+| ElbSslArn |  | string | `""` | no |
+| InstanceKeyPairName | Required: Key pair for the ec2 instances | string | n/a | yes |
+| InstancePort | Open the port on ECS Instances | string | `"80"` | no |
+| InstanceProtocol | Protocol to use with Instance | string | `"tcp"` | no |
+| InstanceRootBlockSize |  | string | `"30"` | no |
+| InstanceSshPort |  | string | `"22"` | no |
+| InstanceType | type of ec2 instance | string | `"t2.large"` | no |
+| LbProtocol |  | string | `"tcp"` | no |
+| SUBNET\_LIST |  | list | n/a | yes |
+| TAGS |  | map | `<map>` | no |
+| VPC\_ID |  | string | `""` | no |
+
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| Jenkins\_DNS | DNS Endpoint for the Jenkins ELB |
+
+
+
+
+
+### **Jenkins Description** ###
 
 - Master Node is configured to run inside Docker Container, the file  `jenkins-master/Dockerfile` is used to build the image for Jenkins
 

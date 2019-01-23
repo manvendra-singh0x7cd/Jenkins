@@ -4,10 +4,11 @@ resource "aws_default_vpc" "default" {
 module "ecs" {
   source = "./ecs"
   VPC_ID = "${aws_default_vpc.default.id}"
-  SUBNET_LIST  = ["subnet-7bb5851e"]
-  AmiId = "ami-06bec82fb46167b4f"
-  InstanceKeyPairName= "Jenkins-master"
+  SUBNET_LIST  = "${var.SUBNET_LIST}"
+  AmiId = "${var.AMiID}"
+  InstanceKeyPairName= "${var.InstanceKeyPairName}"
   AttachExtraPolicies = "${var.PolicyList}"
-  AsgHealthCheckType = "EC2"
+  AsgHealthCheckType = "${var.AsgHealthCheckType}"
   ELBSslArn = "${var.ELBSslArn}"
+  ECS_CLUSTER_NAME = "${var.ECS_CLUSTER_NAME}"
 }
